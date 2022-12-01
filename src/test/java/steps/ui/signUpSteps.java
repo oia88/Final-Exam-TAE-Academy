@@ -148,10 +148,10 @@ public class signUpSteps extends BaseUi {
     @Then("Click log out and validate text without user name specified")
     public void click_log_out_and_validate_text_without_user_name_specified() {
         log.info("Clicking 'Log Out' element and validate");
-        homePage.clickLogoutLink();
         checking("Element: 'Nav Text: 'Welcome' ' is present",
-                homePage.navTextIsDisplayed(),
+                homePage.navTextLogOutIsDisplayed(),
                 is(true));
+        homePage.logout();
     }
 
     @After()
