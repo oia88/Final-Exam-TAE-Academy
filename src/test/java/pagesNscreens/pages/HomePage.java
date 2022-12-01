@@ -94,11 +94,14 @@ public class HomePage extends WebOperations {
         return loginButton.isDisplayed();
     }
     public boolean signUpButtonIsDisplayed(){ return signUpButton.isDisplayed(); }
+    public void logInAndValidate(){
+        clickOnUserIcon();
+        clickOnLoginLink();
+        switchToIframeSection();
+    }
+
 
     public void clickSignUpButton(){ clickElement(signUpButton); }
-
-
-
     public void switchToIframeSignUpSection(){
         this.switchToIframe(modalSignUp);
     }

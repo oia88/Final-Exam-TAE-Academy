@@ -1,4 +1,4 @@
-package reporter;
+package configuration;
 
 import org.slf4j.LoggerFactory;
 
