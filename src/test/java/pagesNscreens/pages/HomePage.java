@@ -108,9 +108,14 @@ public class HomePage extends WebOperations {
     public boolean emailIsDisplayed(){ return emailSignUp.isDisplayed(); }
     public boolean passwordIsDisplayed(){ return passwordSignUp.isDisplayed(); }
     public boolean buttonSignUpIsDisplayed(){ return buttonSignUp.isDisplayed();}
-
     public boolean closeButtonSignUpIsDisplayed(){ return closeButtonSignUp.isDisplayed(); }
 
+
+    public void entryFirstNameInput(String text){ typeOnInput(titleSignUp,text); }
+    public void entryLastNameInput(String text){ typeOnInput(lastNameSignUp,text); }
+    public void entryEmailInput(String text){ typeOnInput(emailSignUp,text); }
+    public void entryPasswordInput(String text){ typeOnInput(passwordSignUp,text); }
+    public void clickButtonSignUp(){ clickElement(buttonSignUp); }
 
 
 

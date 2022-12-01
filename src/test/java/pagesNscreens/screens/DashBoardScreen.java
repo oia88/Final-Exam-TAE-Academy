@@ -1,47 +1,53 @@
 package pagesNscreens.screens;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.WebElement;
 
-public class DashBoardScreen extends BaseScreen{
+/**
+ * DashBoard screen.
+ *
+ * @author Hans.Marquez
+ */
+public class DashBoardScreen extends BaseScreen {
+
     /**
-     * Constructor method for standard screens object.
+     * Constructor method.
      *
      * @param driver : AndroidDriver
-     * @author Arley.Bolivar, Hans.Marquez
+     * @author Hans.Marquez
      */
-    public DashBoardScreen(AndroidDriver driver) {
+    public DashBoardScreen(AndroidDriver<AndroidElement> driver) {
         super(driver);
     }
 
     @AndroidFindBy(id = "com.disney.wdpro.dlr:id/skip_text")
-    private WebElement skipButton;
+    private AndroidElement skipButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Close\")")
-    private WebElement dismissPreferenceUpdateButton;
+    private AndroidElement dismissPreferenceUpdateButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"dismiss-icon\")")
-    private WebElement dismissWelcome;
+    private AndroidElement dismissWelcome;
 
     @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Map, Tab, 2of5\"]")
-    private WebElement mapButton;
+    private AndroidElement mapButton;
 
     @AndroidFindBy(accessibility = "More Options, Tab, 5of5")
-    private WebElement burgerMenuButton;
+    private AndroidElement burgerMenuButton;
 
     @AndroidFindBy(accessibility = "Privacy & Legal button")
-    private WebElement privacyLegalButton;
+    private AndroidElement privacyLegalButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector()" +
             ".resourceId(\"com.disney.wdpro.dlr:id/privacy_and_legal_elements\")")
-    private WebElement privacyLegalList;
+    private AndroidElement privacyLegalList;
 
     @AndroidFindBy(id = "com.disney.wdpro.dlr:id/tab_animated_icon")
-    private WebElement addPlansButton;
+    private AndroidElement addPlansButton;
 
     @AndroidFindBy(accessibility = "Check Dining Availability, 1 of 7, button")
-    private WebElement reserveDiningOption;
+    private AndroidElement reserveDiningOption;
 
 
     /**

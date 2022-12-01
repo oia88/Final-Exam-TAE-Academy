@@ -1,35 +1,41 @@
 package pagesNscreens.screens;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.WebElement;
 
-public class TutorialScreen extends BaseScreen{
+
+/**
+ * Object of the first screen that appears when we open the application.
+ *
+ * @author Arley.Bolivar
+ */
+
+public class TutorialScreen extends BaseScreen {
 
     /**
-     * Constructor method for standard screens object.
+     * Constructor method.
      *
-     * @param driver : AndroidDriver
-     * @author Arley.Bolivar, Hans.Marquez
+     * @param driver the driver
+     * @author Arley.Bolivar
      */
-    public TutorialScreen(AndroidDriver driver) {
+    public TutorialScreen(AndroidDriver<AndroidElement> driver) {
         super(driver);
     }
 
-
     @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Don’t allow\")")
-    private WebElement dismissNotifications;
+    private AndroidElement dismissNotifications;
     @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Get Started\")")
-    private WebElement getStartedButton;
+    private AndroidElement getStartedButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Share Location\")")
-    private WebElement shareLocationButton;
+    private AndroidElement shareLocationButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/button1\")")
-    private WebElement allowLocationButton;
+    private AndroidElement allowLocationButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"While using the app\")")
-    private WebElement allowButton;
+    private AndroidElement allowButton;
 
 
     /**

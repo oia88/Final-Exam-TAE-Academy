@@ -1,34 +1,42 @@
 package pagesNscreens.screens;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.WebElement;
 
+// TODO: Auto-generated Javadoc
+
+/**
+ * Map screen.
+ *
+ * @author Hans.Marquez
+ */
 public class MapScreen extends BaseScreen {
+
+    /**
+     * Constructor method.
+     *
+     * @param driver the driver
+     * @author Hans.Marquez
+     */
+    public MapScreen(AndroidDriver<AndroidElement> driver) {
+        super(driver);
+    }
 
     @AndroidFindBy(xpath =
             "//android.widget.LinearLayout" +
                     "[@content-desc=\"Attractions, Category, Collapsed, 1of11, button\"]" +
                     "/android.widget.ImageView")
-    private WebElement categoryButton;
+    private AndroidElement categoryButton;
 
     @AndroidFindBy(id = "com.disney.wdpro.dlr:id/facilityTypeList")
-    private WebElement categoryList;
+    private AndroidElement categoryList;
 
 
     @AndroidFindBy(xpath = "//android.widget.LinearLayout" +
             "[@content-desc=\"Hotels, Category, 10of11, button\"]")
-    private WebElement hotelOption;
+    private AndroidElement hotelOption;
 
-    /**
-     * Constructor method for standard screens object.
-     *
-     * @param driver : AndroidDriver
-     * @author Arley.Bolivar, Hans.Marquez
-     */
-    public MapScreen(AndroidDriver driver) {
-        super(driver);
-    }
 
 
     /**
@@ -54,4 +62,5 @@ public class MapScreen extends BaseScreen {
      * Access into Category list section.
      */
     public void clickCategoryList() { click(categoryButton); }
+
 }
