@@ -4,7 +4,6 @@ import configuration.WebOperations;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -45,12 +44,10 @@ public class HomePage extends WebOperations {
     private WebElement closeButtonSignUp;
     @FindBy(css = "#global-nav > ul > li.pillar.watch > a")
     private WebElement watchLink;
-
     @FindBy(className = "display-user")
     private WebElement navText;
-
     @FindBy(css = ".account-management a.small")
-    List<WebElement> espnlist;
+    List<WebElement> userIconList;
     @FindBy(className = "display-user")
     private WebElement navTextLogOut;
 
@@ -78,12 +75,10 @@ public class HomePage extends WebOperations {
     }
 
     public void clickOnUserIcon() {
-        //scroll(userIcon);
         clickElement(userIcon);
     }
 
     public void clickOnLoginLink() {
-        //waitForVisibility(loginLink);
         clickElement(loginLink);
     }
 
@@ -166,7 +161,6 @@ public class HomePage extends WebOperations {
     public WatchPage clickLinkWatch() {
         isElementAvailable(watchLink);
         scroll(watchLink);
-        //clickElement(watchLink);
         return new WatchPage(getDriver());
     }
 
@@ -178,7 +172,7 @@ public class HomePage extends WebOperations {
 
 
     public void clickLogoutLink() {
-        clickElement(espnlist.get(0));
+        clickElement(userIconList.get(0));
     }
 
     public boolean navTextLogOutIsDisplayed() {

@@ -20,6 +20,7 @@ public class WatchPage extends HomePage{
     private WebElement carouselCloseButton;
 
 
+
     public boolean carouselIsDisplayed(){
         isElementAvailable(carouselSingle);
         return carouselSingle.isDisplayed();

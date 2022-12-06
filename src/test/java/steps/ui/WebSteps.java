@@ -113,7 +113,6 @@ public class WebSteps extends BaseUi {
     public void go_back_to_the_landing_page_and_log_out() {
         log.info("returning to the Homepage");
         homePage = watchPage.goBackPage();
-        //homePage.hoverUserIcon();
         homePage.clickOnUserIcon();
         checking("Element: Nav text is present",
                 homePage.navTextIsDisplayed(),

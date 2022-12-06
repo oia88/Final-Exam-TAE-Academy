@@ -28,9 +28,9 @@ public class WebOperations {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void waitForInvisibility(WebElement element){
+   /* public void waitForInvisibility(WebElement element){
         wait.until(ExpectedConditions.invisibilityOf(element));
-    }
+    }*/
 
     public void typeOnInput(WebElement element, String text){
         element.sendKeys(text);
@@ -46,9 +46,9 @@ public class WebOperations {
         getDriver().switchTo().frame(frameToChange);
     }
 
-    public void getOutFromIframe(){
+   /* public void getOutFromIframe(){
         driver.switchTo().defaultContent();
-    }
+    }*/
 
     public void scroll(WebElement element){
         JavascriptExecutor js =(JavascriptExecutor)driver;
