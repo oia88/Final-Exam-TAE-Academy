@@ -20,7 +20,10 @@ public class WatchPage extends HomePage{
     private WebElement carouselCloseButton;
 
 
-    public boolean carouselIsDisplayed(){ return carouselSingle.isDisplayed(); }
+    public boolean carouselIsDisplayed(){
+        isElementAvailable(carouselSingle);
+        return carouselSingle.isDisplayed();
+    }
 
     public boolean carouselTitleIsDisplayed(){ return carouselTitle.isDisplayed(); }
 
@@ -28,9 +31,18 @@ public class WatchPage extends HomePage{
 
     public void clickSecondCarousel(){ clickElement(carouselSecondItem); }
 
-    public boolean closeButtonIsDisplayed(){ return carouselCloseButton.isDisplayed(); }
+    public boolean closeButtonIsDisplayed(){
+        //isElementAvailable(carouselCloseButton);
+        waitForClickable(carouselCloseButton);
+        //waitForVisibility(carouselCloseButton);
+        return carouselCloseButton.isDisplayed();
+    }
 
-    public void clickCloseButton(){ clickElement(carouselCloseButton); }
+    public void clickCloseButton(){
+        //isElementAvailable(carouselCloseButton);
+        //waitForClickable(carouselCloseButton);
+        clickElement(carouselCloseButton);
+    }
 
     public HomePage goBackPage(){
         getDriver().navigate().back();

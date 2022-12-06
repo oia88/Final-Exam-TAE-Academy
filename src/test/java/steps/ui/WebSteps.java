@@ -1,5 +1,6 @@
 package steps.ui;
 
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -9,7 +10,7 @@ import io.cucumber.java.en.When;
 
 import static org.hamcrest.Matchers.is;
 
-public class signUpSteps extends BaseUi {
+public class WebSteps extends BaseUi {
 
     @Before()
     public void setup(){
@@ -17,15 +18,17 @@ public class signUpSteps extends BaseUi {
         testSetup("chrome");
     }
 
-    @Given("the user is on sign up section")
-    public void the_user_is_on_sign_up_section() {
+    @Given("the user should be able to go to the log in section and get inside sign up")
+    public void the_user_should_be_able_to_go_to_the_log_in_section_and_get_inside_sign_up() {
         homePage.closeBanner();
-        homePage.logInAndValidate();
+        homePage.clickOnUserIcon();
+        homePage.clickOnLoginLink();
         log.info("Validate a modal is present and contains:");
         checking(
                 "Element: modal is present",
                 homePage.modalIsDisplayed(),
                 is(true));
+        homePage.switchToIframeSection();
         checking(
                 "Element: 'ESPN Logo' is present",
                 homePage.espnLogoIsDisplayed(),
@@ -38,14 +41,9 @@ public class signUpSteps extends BaseUi {
                 "Element: 'Sign Up' is present",
                 homePage.signUpButtonIsDisplayed(),
                 is(true));
-    }
-
-    @When("user enters the correct data credentials")
-    public void user_enters_the_correct_data_credentials() {
+        homePage.clickSignUpButton();
         log.info("Accessing into the Sign Up modal..");
         log.info("Validating the presence of: ");
-        homePage.clickSignUpButton();
-        homePage.switchToIframeSignUpSection();
         checking(
                 "Element: 'Sign Up title' is present",
                 homePage.titleSignUpIsDisplayed(),
@@ -75,10 +73,8 @@ public class signUpSteps extends BaseUi {
                 homePage.closeButtonSignUpIsDisplayed(),
                 is(true));
     }
-
-    @Then("the user should be create a new account and logged in" +
-            "{string} {string} {string} {string}")
-    public void the_user_should_be_create_a_new_account_and_logged_in(
+    @And("the user should be created with firstname: {string}, lastname: {string}, email: {string} and password: {string}")
+    public void the_user_should_be_created_with_firstname_lastname_email_and_password(
             String firstName, String lastName, String email, String password) {
         log.info("Enter valid information in the form and click ‘Sign Up’");
         homePage.entryFirstNameInput(firstName);
@@ -87,26 +83,18 @@ public class signUpSteps extends BaseUi {
         homePage.entryPasswordInput(password);
         homePage.clickButtonSignUp();
     }
-
-
-
-
-
-    @Given("the user logged goes to watch page")
-    public void the_user_logged_goes_to_watch_page() {
+    @When("Once logged in, go to watch and validate that at least one carousel is present")
+    public void once_logged_in_go_to_watch_and_validate_that_at_least_one_carousel_is_present() {
         log.info("Entry into the Watch page");
         watchPage = homePage.clickLinkWatch();
-    }
-    @When("validate that at least one carousel is present")
-    public void validate_that_at_least_one_carousel_is_present() {
         log.info("validating that at least one carousel is present");
         checking(
                 "Element: 'Carousel' is present",
                 watchPage.carouselIsDisplayed(),
                 is(true));
     }
-    @And("Click on the second card in the first carousel")
-    public void click_on_the_second_card_in_the_first_carousel() {
+    @And("Click on the second card in the first carousel and validate")
+    public void click_on_the_second_card_in_the_first_carousel_and_validate() {
         log.info("validating that each card in the carousel has a title and a small description");
         checking("Element: 'Carousel Title' is present",
                 watchPage.carouselTitleIsDisplayed(),
@@ -119,41 +107,22 @@ public class signUpSteps extends BaseUi {
         checking("Element: 'Close 'X' Button' is present",
                 watchPage.closeButtonIsDisplayed(),
                 is(true));
-    }
-    @Then("Go back to the landing page")
-    public void go_back_to_the_landing_page() {
-        log.info("returning to the Homepage");
         watchPage.clickCloseButton();
+    }
+    @Then("Go back to the landing page and log out")
+    public void go_back_to_the_landing_page_and_log_out() {
+        log.info("returning to the Homepage");
         homePage = watchPage.goBackPage();
-    }
-
-
-
-
-
-
-
-    @Given("the user can verify if is logged")
-    public void the_user_can_verify_if_is_logged() {
-        log.info("verifying that user is currently logged");
-        homePage.hoverUserIcon();
-    }
-    @When("Validate the sign up modal")
-    public void validate_the_sign_up_modal() {
-        log.info("Validating the element 'Nav text'");
-        checking("Element: 'Nav Text: 'Welcome {{username}}!' ' is present",
+        //homePage.hoverUserIcon();
+        homePage.clickOnUserIcon();
+        checking("Element: Nav text is present",
                 homePage.navTextIsDisplayed(),
                 is(true));
-    }
-    @Then("Click log out and validate text without user name specified")
-    public void click_log_out_and_validate_text_without_user_name_specified() {
-        log.info("Clicking 'Log Out' element and validate");
-        checking("Element: 'Nav Text: 'Welcome' ' is present",
+        homePage.clickLogoutLink();
+        checking("Element: Nav text logout is present",
                 homePage.navTextLogOutIsDisplayed(),
                 is(true));
-        homePage.logout();
     }
-
     @After()
     public void closeBrowserEspn(){
         closeBrowser();

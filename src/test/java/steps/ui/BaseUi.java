@@ -18,8 +18,8 @@ public class BaseUi {
     protected Driver driver;
     protected HomePage homePage;
     protected WatchPage watchPage;
-    protected String url = "https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud";
-    public Logger log = Logger.getLogger(BaseUi.class);
+    protected String url = "https://www.espnqa.com/?src=com&_adblock=true&espn=cloud";
+    public static Logger log = Logger.getLogger(BaseUi.class);
 
     //@Parameters({"browser", "url"})
 

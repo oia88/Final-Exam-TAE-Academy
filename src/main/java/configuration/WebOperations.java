@@ -1,7 +1,7 @@
 package configuration;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -13,7 +13,7 @@ public class WebOperations {
 
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         initElements(driver, this);
     }
 
@@ -24,17 +24,44 @@ public class WebOperations {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForClickable(WebElement element){
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForInvisibility(WebElement element){
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
     public void typeOnInput(WebElement element, String text){
         element.sendKeys(text);
     }
 
     public void clickElement(WebElement element){
-        waitForVisibility(element);
+        waitForClickable(element);
         element.click();
     }
 
     public void switchToIframe(WebElement frameToChange){
         waitForVisibility(frameToChange);
         getDriver().switchTo().frame(frameToChange);
+    }
+
+    public void getOutFromIframe(){
+        driver.switchTo().defaultContent();
+    }
+
+    public void scroll(WebElement element){
+        JavascriptExecutor js =(JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", element);
+    }
+
+    public boolean isElementAvailable(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (NoSuchElementException | TimeoutException e) {
+            return false;
+        }
     }
 }
