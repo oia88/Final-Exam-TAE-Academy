@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Disneyland test suite">
+    <test verbose="1" preserve-order="true" name="C:/Users/oscar.araque/IdeaProjects/Final Exam TAE Academy">
+        <classes>
+            <class name="runners.MobileRunner"/>
+        </classes>
+    </test>
+</suite>

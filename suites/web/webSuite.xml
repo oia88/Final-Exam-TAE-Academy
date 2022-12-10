@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ESPN test suite">
+    <parameter name="url" value="https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud"/>
+    <test verbose="1" preserve-order="true" name="C:/Users/oscar.araque/IdeaProjects/Final Exam TAE Academy">
+        <!--<parameter name="browser" value="chrome"/>-->
+        <classes>
+            <class name="runners.WebRunner"/>
+        </classes>
+    </test>
+</suite>
