@@ -9,11 +9,16 @@ import io.appium.java_client.touch.offset.PointOption;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Capabilities;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import static java.lang.String.format;
@@ -28,23 +33,36 @@ public abstract class BaseScreen {
     /**
      * The driver.
      */
-    protected final AndroidDriver<AndroidElement> driver;
+    protected static AndroidDriver<AndroidElement> driver;
 
     /**
      * The log.
      */
     public Logger log = Logger.getLogger(BaseScreen.class);
 
+    static{
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        Capabilities.deviceSetUp(capabilities);
+        Capabilities.applicationSetUp(capabilities);
+        try {
+            driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
     /**
      * Constructor method for standard screens object.
      *
-     * @param driver : AndroidDriver
+     *
      * @author Arley.Bolivar, Hans.Marquez
      */
-    public BaseScreen(AndroidDriver<AndroidElement> driver) {
-        this.driver = driver;
+    public BaseScreen() {
+        //this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(
-                driver, Duration.ofSeconds(0)), this);
+                driver, Duration.ofSeconds(2)), this);
     }
 
     /**
@@ -69,7 +87,7 @@ public abstract class BaseScreen {
      * @author Hans.Marquez
      */
     public void click(AndroidElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, 25);
         wait.until(ExpectedConditions.visibilityOf(element));
         element.click();
     }
@@ -83,7 +101,7 @@ public abstract class BaseScreen {
      * @author Hans.Marquez
      */
     public void sendKeys(AndroidElement element, String sequence) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(element));
         element.sendKeys(sequence);
     }
@@ -95,11 +113,11 @@ public abstract class BaseScreen {
      * @author Hans.Marquez
      */
     public boolean isElementAvailable(AndroidElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;
-        } catch (NoSuchElementException | TimeoutException e) {
+        } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
             return false;
         }
     }
@@ -112,7 +130,7 @@ public abstract class BaseScreen {
      * @author Hans.Marquez
      */
     public boolean isElementAvailable(AndroidElement element ,int timeout) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;

@@ -13,16 +13,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
  */
 public class MapScreen extends BaseScreen {
 
-    /**
-     * Constructor method.
-     *
-     * @param driver the driver
-     * @author Hans.Marquez
-     */
-    public MapScreen(AndroidDriver<AndroidElement> driver) {
-        super(driver);
-    }
-
     @AndroidFindBy(xpath =
             "//android.widget.LinearLayout" +
                     "[@content-desc=\"Attractions, Category, Collapsed, 1of11, button\"]" +

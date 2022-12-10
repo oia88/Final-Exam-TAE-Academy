@@ -8,6 +8,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class Driver {
     private WebDriver driver;
 
+    /**
+     * defines which browser will execute the tests
+     * @author Oscar.Araque
+     * @param browser
+     */
     public Driver(String browser) {
         switch (browser.toLowerCase()){
             case "chrome": {

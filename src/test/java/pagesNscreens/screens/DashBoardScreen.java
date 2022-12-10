@@ -3,6 +3,8 @@ package pagesNscreens.screens;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * DashBoard screen.
@@ -10,16 +12,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
  * @author Hans.Marquez
  */
 public class DashBoardScreen extends BaseScreen {
-
-    /**
-     * Constructor method.
-     *
-     * @param driver : AndroidDriver
-     * @author Hans.Marquez
-     */
-    public DashBoardScreen(AndroidDriver<AndroidElement> driver) {
-        super(driver);
-    }
 
     @AndroidFindBy(id = "com.disney.wdpro.dlr:id/skip_text")
     private AndroidElement skipButton;
@@ -30,7 +22,7 @@ public class DashBoardScreen extends BaseScreen {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"dismiss-icon\")")
     private AndroidElement dismissWelcome;
 
-    @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Map, Tab, 2of5\"]")
+    @AndroidFindBy(accessibility = "Map, Tab, 2of5")
     private AndroidElement mapButton;
 
     @AndroidFindBy(accessibility = "More Options, Tab, 5of5")
@@ -49,6 +41,8 @@ public class DashBoardScreen extends BaseScreen {
     @AndroidFindBy(accessibility = "Check Dining Availability, 1 of 7, button")
     private AndroidElement reserveDiningOption;
 
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout")
+    private AndroidElement welcomeBanner;
 
     /**
      * @author Hans.Marquez
@@ -58,12 +52,20 @@ public class DashBoardScreen extends BaseScreen {
         if (this.isElementAvailable(skipButton, 25)){
             click(skipButton);
         }
-        if (this.isElementAvailable(dismissWelcome, 25)){
+
+        isElementAvailable(mapButton);
+
+        log.info(this.isElementAvailable(dismissWelcome, 45));
             click(dismissWelcome);
-        }
+
         if (this.isElementAvailable(dismissPreferenceUpdateButton, 25)){
             click(dismissPreferenceUpdateButton);
         }
+    }
+
+     public void waitForInvisibility(AndroidElement element){
+         WebDriverWait wait = new WebDriverWait(driver, 25);
+         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     /**
@@ -74,7 +76,7 @@ public class DashBoardScreen extends BaseScreen {
     public MapScreen goToMapScreen() {
         goToDashboardScreen();
         click(mapButton);
-        return new MapScreen(driver);
+        return new MapScreen();
     }
 
 

@@ -11,15 +11,19 @@ public class WebOperations {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
+    /**
+     * @param driver initiate the driver in the constructor
+     */
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        this.wait = new WebDriverWait(driver, 4);
         initElements(driver, this);
     }
 
     protected WebDriver getDriver() {
         return this.driver;
     }
+
     public void waitForVisibility(WebElement element){
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -28,9 +32,7 @@ public class WebOperations {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-   /* public void waitForInvisibility(WebElement element){
-        wait.until(ExpectedConditions.invisibilityOf(element));
-    }*/
+
 
     public void typeOnInput(WebElement element, String text){
         element.sendKeys(text);
@@ -41,22 +43,34 @@ public class WebOperations {
         element.click();
     }
 
+    /**
+     * switch into de iframe context and interact with it
+     * @param frameToChange
+     * @author Oscar.Araque
+     */
     public void switchToIframe(WebElement frameToChange){
         waitForVisibility(frameToChange);
         getDriver().switchTo().frame(frameToChange);
     }
 
-   /* public void getOutFromIframe(){
-        driver.switchTo().defaultContent();
-    }*/
-
+    /**
+     * Make a scroll and find the element
+     * @param element
+     * @ Oscar.Araque
+     */
     public void scroll(WebElement element){
         JavascriptExecutor js =(JavascriptExecutor)driver;
         js.executeScript("arguments[0].click();", element);
     }
 
+    /**
+     * Check if an element is available
+     * @param element
+     * @return a boolean
+     * @author Oscar.Araque
+     */
     public boolean isElementAvailable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+        WebDriverWait wait = new WebDriverWait(driver, 7);
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;

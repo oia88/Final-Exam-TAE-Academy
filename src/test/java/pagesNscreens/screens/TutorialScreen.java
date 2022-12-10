@@ -13,15 +13,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class TutorialScreen extends BaseScreen {
 
-    /**
-     * Constructor method.
-     *
-     * @param driver the driver
-     * @author Arley.Bolivar
-     */
-    public TutorialScreen(AndroidDriver<AndroidElement> driver) {
-        super(driver);
-    }
 
     @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Don’t allow\")")
     private AndroidElement dismissNotifications;
@@ -55,6 +46,6 @@ public class TutorialScreen extends BaseScreen {
         click(shareLocationButton);
         click(allowLocationButton);
         click(allowButton);
-        return new DashBoardScreen(driver);
+        return new DashBoardScreen();
     }
 }
